@@ -5,13 +5,13 @@ def find_classname(name_wanted,all_classes: list):
   """
   Returns a list of class objects filtered by the desired class (only 1 at this time)
   """
-  return [each_class for each_class in all_classes if each_class.get_name() == name_wanted]
+  return [each_class for each_class in all_classes if each_class.get_name() == name_wanted.upper()]
 
 def find_instructor(ins_wanted, all_ins: list):
   """
   Returns a list of class objects filtered by the desired instructor (only 1 at this time)
   """
-  return [each_ins for each_ins in all_ins if each_ins.get_instructor() == ins_wanted]
+  return [each_ins for each_ins in all_ins if each_ins.get_instructor().upper() == ins_wanted.upper()]
 
 # programming classes
 comp_math = Class(name="MAD2502", instructor="Ross Ptacek", section="17336", day="024", period=5)
