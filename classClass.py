@@ -28,9 +28,15 @@ class Class:
 
     def get_name(self):
         """
-        A getter for the class name of each Class object
+        A getter for the class name for the Class object
         """
         return self.name
+
+    def get_instructor(self):
+        """
+        returns the name of the instructor for the Class object
+        """
+        return self.instructor
 
     def to_display_string(self):
         """
