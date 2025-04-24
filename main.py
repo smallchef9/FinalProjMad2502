@@ -31,4 +31,9 @@ physics_2 = Class(name="PHY2054", instructor="STAFF", section="14616", day="13",
 gen_chem_1 = Class(name="CHM2045", instructor="STAFF", section="10561", day="024", period=1)
 bio_1 = Class(name="BSC2010", instructor="David Oppenheimer", section="11154", day="024", period=2)
 
+# english classes
+english_1 = Class(name = "ENC1101", instructor = "Angela Brown", section = "27585", day = "13", period = 3)
+english_2 = Class(name = "ENC1102", instructor = "STAFF", section = "11916", day = "24",period = 4)
+english_3 = Class(name = "ENC1136", instructor = "STAFF", section = "16175", day = "024", period = 4)
+
 schedule = np.empty((8, 5)) # making an empty numpy array with 8 rows (for the 8 periods) and 5 columns (for the days of the week)
