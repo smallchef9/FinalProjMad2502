@@ -36,4 +36,35 @@ english_1 = Class(name = "ENC1101", instructor = "Angela Brown", section = "2758
 english_2 = Class(name = "ENC1102", instructor = "STAFF", section = "11916", day = "24",period = 4)
 english_3 = Class(name = "ENC1136", instructor = "STAFF", section = "16175", day = "024", period = 4)
 
-schedule = np.empty((8, 5)) # making an empty numpy array with 8 rows (for the 8 periods) and 5 columns (for the days of the week)
+
+classes_list = [comp_math, prog_1, prog_2, prog_with_r, calc_1, calc_2, calc_3, lin_alg_1, physics_1, physics_2, gen_chem_1, bio_1, english_1, english_2, english_3]
+
+def schedule_maker(classes: list):
+    """
+    Parameters:
+         classes: the list of classes the user wants to add to their schedule
+         # planning on adding more parameters later (time of day, preferred professor, etc.)
+
+    Returns:
+        schedule: a 8x5 list that represents the 5 days of the week and 8 class periods
+    """
+    # schedule = np.zeros((8, 5)) # making an of zeros numpy array with 8 rows (for the 8 periods) and 5 columns (for the days of the week)
+
+    # I couldn't get the numpy array to work with the Class objects, so I made a list to add to instead (will try again later)
+    schedule = [[0 for col in range(5)] for row in range(8)] # making a list with 8 rows and 5 columns
+
+    for clss in classes:
+        if clss in classes_list:
+            ind = classes_list.index(clss)
+            time_blocks = classes_list[ind].get_time_blocks()
+
+            for day, period in time_blocks:
+                schedule[int(period)][int(day)] = classes_list[ind].to_display_string()
+
+    return schedule
+
+# testing to see if the function works, should have period 5 of M,W,F with comp math and period 5 of T,TH with physics 1
+test_list = [comp_math, physics_1] # the most desired class should be first, the least desired last
+test_schedule = schedule_maker(test_list)
+
+print(test_schedule) #should work on making the schedule display in a more readable way
