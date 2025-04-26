@@ -26,6 +26,18 @@ class Class:
                 blocks.append((d, p))
         return blocks
 
+    def get_name(self):
+        """
+        A getter for the class name for the Class object
+        """
+        return self.name
+
+    def get_instructor(self):
+        """
+        returns the name of the instructor for the Class object
+        """
+        return self.instructor
+
     def to_display_string(self):
         """
         Display string for the schedule grid.
