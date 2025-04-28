@@ -1,4 +1,5 @@
 import numpy as np
+from tabulate import tabulate # got the documentation from https://medium.com/@qemhal.h/different-ways-to-display-a-table-in-python-d867aefb624a
 
 def add_class_to_schedule(schedule, course):
     """
@@ -93,13 +94,15 @@ def build_schedule(class_list, preferences, schedule=None):
     # Now, print the final schedule
     print("\n📅 Final Weekly Schedule:")
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    for i in range(5):
-        print(f"\n{days[i]}:")
-        for j in range(8):
-            cell = schedule[i][j]
-            if cell:
-                print(f"  Period {j}: \n{cell}")
-            else:
-                print(f"  Period {j}: Free")
+    # for i in range(5):
+    #     print(f"\n{days[i]}:")
+    #     for j in range(8):
+    #         cell = schedule[i][j]
+    #         if cell:
+    #             print(f"  Period {j}: \n{cell}")
+    #         else:
+    #             print(f"  Period {j}: Free")
+
+    print(tabulate(schedule, headers=days, tablefmt="fancy_grid")) # prints schedule out in a nice grid
 
     return schedule

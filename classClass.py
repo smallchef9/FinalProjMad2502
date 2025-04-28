@@ -1,12 +1,13 @@
 
 class Class:
-    def __init__(self, name, instructor, section, day, period, duration=1):
+    def __init__(self, name, instructor, section, day, period, duration=1, credits=3):
         self.name = name
         self.instructor = instructor
         self.section = section
         self.day = [int(d) for d in str(day)]
         self.period = period
         self.duration = duration
+        self.credits = credits
     """Most parameters self explanatory, 
     day parameter will be a string including ints 0-4 representing Monday-Friday,
     periods will run from 0-7 inclusive,
