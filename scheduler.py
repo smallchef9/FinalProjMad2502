@@ -5,8 +5,8 @@ def add_class_to_schedule(schedule, course):
     Attempts to add a course to the schedule.
     If a time conflict is found, it will print a warning and skip that block.
 
-    :param schedule: 5x8 numpy array representing the weekly schedule
-    :param course: Class object to be added
+    param schedule: 5x8 numpy array representing the weekly schedule
+    param course: Class object to be added
     """
     success = True  # Track if the course fits fully
     for day, period in course.get_time_blocks():
