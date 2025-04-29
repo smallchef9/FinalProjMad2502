@@ -1,7 +1,6 @@
 from classClass import Class
 import sys
 import numpy as np
-from tabulate import tabulate # got the documentation from https://medium.com/@qemhal.h/different-ways-to-display-a-table-in-python-d867aefb624a
 from scheduler import *
 import readerr as read
 

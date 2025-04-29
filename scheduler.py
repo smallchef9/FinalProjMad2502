@@ -6,7 +6,7 @@ def add_class_to_schedule(schedule, course):
     Attempts to add a course to the schedule.
     If a time conflict is found, it will print a warning and skip that block.
 
-    param schedule: 5x8 numpy array representing the weekly schedule
+    param schedule: 8x5 numpy array representing the weekly schedule
     param course: Class object to be added
     """
     success = True  # Track if the course fits fully
@@ -98,15 +98,6 @@ def build_schedule(class_list, preferences, schedule=None):
     # Now, print the final schedule
     print("\n📅 Final Weekly Schedule:")
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    # for i in range(5):
-    #     print(f"\n{days[i]}:")
-    #     for j in range(8):
-    #         cell = schedule[i][j]
-    #         if cell:
-    #             print(f"  Period {j}: \n{cell}")
-    #         else:
-    #             print(f"  Period {j}: Free")
-
     print(tabulate(schedule, headers=days, tablefmt="fancy_grid")) # prints schedule out in a nice grid
 
     return schedule
