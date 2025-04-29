@@ -30,6 +30,10 @@ def passes_preferences(course, preferences, schedule=None):
     return True if course is acceptable, False otherwise
     """
 
+    if preferences is None:
+        #All checks are automatically passed because there are no restrictions.
+        return True
+
     # 1. Check no_early_periods
     if 'no_early_periods' in preferences:
         earliest = preferences['no_early_periods']

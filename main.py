@@ -1,4 +1,5 @@
 from classClass import Class
+import sys
 import numpy as np
 from tabulate import tabulate # got the documentation from https://medium.com/@qemhal.h/different-ways-to-display-a-table-in-python-d867aefb624a
 from scheduler import *
@@ -84,4 +85,82 @@ classes_list = [comp_math, prog_1, prog_2, prog_with_r, calc_1, calc_2, calc_3, 
 
 tester = read.loadClasses("randomClasses.txt")
 test_list = [comp_math, physics_1, english_1, calc_3, prog_1, prog_with_r] # the most desired class should be first, the least desired last
+test_preferences = {'no_early_periods': 3, 'avoid_days': [4],'preferred_instructors': ['Ross Ptacek', 'Ashish Aggarwal'],
+                    'max_classes':2}
+#print("\nTesting with preferences:\n")
+#test_schedule = build_schedule(test_list, test_preferences) # insert preferences dictionary here
+
+def main():
+  global classes_list
+  my_courses = []
+  my_preferences = {}
+  menu = """
+1. Add courses to cart
+2. View your courses
+3. Add preferences
+4. Build schedule
+5. Exit
+  """
+  print("Welcome to the schedule builder :)")
+
+
+  running = True
+  while running:
+    print(menu)
+    menu_select = input("What would you like to do?: ")
+
+    if menu_select.isdigit():
+      if menu_select == "1":
+        print("All available courses: ")
+        for ind,course in enumerate(classes_list):
+          print(f"{ind+1}. {course.name}")
+        print()
+
+        selecting = True
+        while selecting:
+          course_to_add = input("Enter a course code (to stop, enter 'done'): ")
+
+          course_found = None
+          for course in classes_list:
+            if course_to_add.upper() == course.get_name().upper():  # Ignore case sensitivity
+              course_found = course
+              break
+
+          if course_found:
+            # Add the class object to my_courses
+            my_courses.append(course_found)
+            print(f"✅ Course {course_found.name} has been added to your cart!\n")
+          elif course_to_add.lower() == "done":
+            selecting = False
+          else:
+            print(f"❌ We do not offer this course: '{course_to_add}'.\n")
+
+
+      elif menu_select == "2":
+          if my_courses:
+            print("Your selected courses: ")
+            for ind,course in enumerate(my_courses):
+              print(f"{ind+1}. {course.name}")
+          else:
+            print("You haven't selected any courses!")
+
+      elif menu_select == "3":
+        pass
+
+      elif menu_select == "4":
+        build_schedule(my_courses, my_preferences)
+
+      elif menu_select == "5":
+        running = False
+        print("\nThank you for using the schedule builder :) Goodbye!")
+        sys.exit()
+      elif int(menu_select) > 5:
+        print("Invalid selection, please try again.")
+    else:
+      print("Invalid selection, please try again.")
+
+
+
+while __name__ == "__main__":
+  main()
 test_schedule = build_schedule(tester,sample_preferences ) # insert preferences dictionary here
