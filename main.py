@@ -2,8 +2,14 @@ from classClass import Class
 import numpy as np
 from tabulate import tabulate # got the documentation from https://medium.com/@qemhal.h/different-ways-to-display-a-table-in-python-d867aefb624a
 from scheduler import *
+import readerr as read
 
-
+sample_preferences = {
+    "no_early_periods": 1,          # Do not allow classes before 3rd period (periods 0 or 1 are not allowed)
+    "no_late_periods": 6,            # Do not allow classes after 7th period (periods 7 or higher are not allowed)
+    "avoid_days": [4],               # Avoid classes on Friday (day 4)
+    "max_classes": 3                 # No more than 3 classes scheduled on any single day
+}
 def find_classname(name_wanted,all_classes: list):
   """
   Returns a list of class objects filtered by the desired class (only 1 at this time)
@@ -76,6 +82,6 @@ classes_list = [comp_math, prog_1, prog_2, prog_with_r, calc_1, calc_2, calc_3, 
 #
 #     return schedule, total_credits
 
-
+tester = read.loadClasses("randomClasses.txt")
 test_list = [comp_math, physics_1, english_1, calc_3, prog_1, prog_with_r] # the most desired class should be first, the least desired last
-test_schedule, creds = build_schedule(test_list, None) # insert preferences disctionary here
+test_schedule = build_schedule(tester,sample_preferences ) # insert preferences dictionary here

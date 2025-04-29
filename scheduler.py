@@ -24,10 +24,10 @@ def passes_preferences(course, preferences, schedule=None):
     """
     Checks if a course passes all the student's preferences.
 
-    :param course: Class object
-    :param preferences: Dictionary of preferences
-    :param schedule: (Optional) Current schedule, to check for max_classes rule
-    :return: True if course is acceptable, False otherwise
+    param course: Class object
+    param preferences: Dictionary of preferences
+    param schedule: (Optional) Current schedule, to check for max_classes rule
+    return True if course is acceptable, False otherwise
     """
 
     # 1. Check no_early_periods
@@ -72,10 +72,10 @@ def build_schedule(class_list, preferences, schedule=None):
     Builds an optimized schedule based on classes and student preferences,
     and prints the final schedule.
 
-    :param class_list: List of Class objects
-    :param preferences: Dictionary of preferences
-    :param schedule: Optional existing schedule array (5x8), if None, creates new
-    :return: Final numpy array representing the schedule
+    param class_list: List of Class objects
+    param preferences: Dictionary of preferences
+    param schedule: Optional existing schedule array (5x8), if None, creates new
+    return Final numpy array representing the schedule
     """
     if schedule is None:
         schedule = np.full((5, 8), "", dtype=object)
