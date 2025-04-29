@@ -4,6 +4,8 @@ import numpy as np
 from scheduler import *
 import readerr as read
 
+# link to github repository: https://github.com/smallchef9/FinalProjMad2502
+
 sample_preferences = {
     "no_early_periods": 1,          # Do not allow classes before 3rd period (periods 0 or 1 are not allowed)
     "no_late_periods": 6,            # Do not allow classes after 7th period (periods 7 or higher are not allowed)
