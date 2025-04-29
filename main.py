@@ -99,7 +99,8 @@ def main():
 2. View your courses
 3. Add preferences
 4. Build schedule
-5. Exit
+5. Read classes from file
+6. Exit
   """
   print("Welcome to the schedule builder :)")
 
@@ -145,12 +146,36 @@ def main():
             print("You haven't selected any courses!")
 
       elif menu_select == "3":
-        pass
+        print("Here are the available preferences: ")
+        prefs = ["no_early_periods","no_late_periods","avoid_days", "preferred_instructors","max_classes"]
+        print("""
+        1. no_early_periods
+        2. no_late_periods
+        3. avoid_days
+        4. preferred_instructors
+        5. max_classes
+        """)
+        selecting = True
+        while selecting:
+          pref_to_add = input("Enter any preferences you have  (to stop, enter 'done'): ")
+          if pref_to_add in prefs:
+            #my_preferences[] =
+            pass
+
 
       elif menu_select == "4":
         build_schedule(my_courses, my_preferences)
 
       elif menu_select == "5":
+        filename = input("Enter the filename to load classes from (example: randomClasses.txt): ")
+        try:
+          new_classes = read.loadClasses(filename)
+          classes_list.extend(new_classes)
+          print(f"✅ {len(new_classes)} classes successfully loaded and added to available courses!\n")
+        except FileNotFoundError:
+          print(f"❌ Could not find file '{filename}'. Please make sure it exists.")
+
+      elif menu_select == "6":
         running = False
         print("\nThank you for using the schedule builder :) Goodbye!")
         sys.exit()
