@@ -177,6 +177,7 @@ Choose a preference to add:
             my_preferences["preferred_instructors"] = instructor_list
             print(f"✅ Set preferred instructors: {instructor_list}.\n")
 
+
           elif pref_select == "5":
             max_classes = int(input("Enter the maximum number of classes per day: "))
             my_preferences["max_classes"] = max_classes

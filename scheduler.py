@@ -11,9 +11,9 @@ def add_class_to_schedule(schedule, course):
     """
     success = True  # Track if the course fits fully
     for day, period in course.get_time_blocks():
-        if schedule[day][period] == "":
+        if schedule[period][day] == "":
             # No conflict, safe to place
-            schedule[day][period] = course.to_display_string()
+            schedule[period][day] = course.to_display_string()
         else:
             # Conflict detected
             print(f"⚠️ Conflict detected: {course.name} conflicts with another class on day {day}, period {period}.")
@@ -82,7 +82,7 @@ def build_schedule(class_list, preferences, schedule=None):
     return Final numpy array representing the schedule
     """
     if schedule is None:
-        schedule = np.full((5, 8), "", dtype=object)
+        schedule = np.full((8,5), "", dtype=object)
 
     for course in class_list:
         if not passes_preferences(course, preferences, schedule):
