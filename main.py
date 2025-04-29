@@ -49,46 +49,13 @@ english_3 = Class(name = "ENC1136", instructor = "STAFF", section = "16175", day
 
 classes_list = [comp_math, prog_1, prog_2, prog_with_r, calc_1, calc_2, calc_3, lin_alg_1, physics_1, physics_2, gen_chem_1, bio_1, english_1, english_2, english_3]
 
-# def schedule_maker(classes: list):
-#     """
-#     Parameters:
-#          classes: the list of classes the user wants to add to their schedule
-#          # planning on adding more parameters later (time of day, preferred professor, etc.)
-#
-#     Returns:
-#         schedule: a 8x5 list that represents the 5 days of the week and 8 class periods
-#     """
-#
-#     schedule = [[None for col in range(5)] for row in range(8)] # making a list with 8 rows and 5 columns
-#     total_credits = 0
-#
-#     for clss in classes:
-#         if clss in classes_list:
-#             ind = classes_list.index(clss)
-#             time_blocks = classes_list[ind].get_time_blocks()
-#
-#             added_class = False
-#             for day, period in time_blocks:
-#                 if schedule[int(period)][int(day)] is None:
-#                     schedule[int(period)][int(day)] = classes_list[ind].to_display_string()
-#                     added_class = True
-#                 else:
-#                     print(f"{clss} conflicts with another class, could not add to schedule.")
-#
-#             if added_class:
-#                 total_credits += classes_list[ind].credits
-#         if total_credits > 18:
-#             print("Maximum credit hours reached.")
-#             break
-#
-#     return schedule, total_credits
+
 
 tester = read.loadClasses("randomClasses.txt")
 test_list = [comp_math, physics_1, english_1, calc_3, prog_1, prog_with_r] # the most desired class should be first, the least desired last
 test_preferences = {'no_early_periods': 3, 'avoid_days': [4],'preferred_instructors': ['Ross Ptacek', 'Ashish Aggarwal'],
                     'max_classes':2}
-#print("\nTesting with preferences:\n")
-#test_schedule = build_schedule(test_list, test_preferences) # insert preferences dictionary here
+
 
 def main():
   global classes_list
@@ -145,29 +112,87 @@ def main():
           else:
             print("You haven't selected any courses!")
 
-      elif menu_select == "3":
-        print("Here are the available preferences: ")
-        prefs = ["no_early_periods","no_late_periods","avoid_days", "preferred_instructors","max_classes"]
-        print("""
-        1. no_early_periods
-        2. no_late_periods
-        3. avoid_days
-        4. preferred_instructors
-        5. max_classes
-        """)
-        selecting = True
-        while selecting:
-          pref_to_add = input("Enter any preferences you have  (to stop, enter 'done'): ")
-          if pref_to_add in prefs:
-            #my_preferences[] =
-            pass
 
+      elif menu_select == "3":
+
+        pref_menu = """
+
+Choose a preference to add:
+
+1. No early periods
+
+2. No late periods
+
+3. Avoid specific days
+
+4. Preferred instructors
+
+5. Max classes per day
+
+6. Go back to main menu
+
+"""
+
+        adding_prefs = True
+
+        while adding_prefs:
+
+          print(pref_menu)
+
+          pref_select = input("Select an option: ")
+
+          if pref_select == "1":
+
+            earliest = int(input("Enter the earliest allowed period (0-7): "))
+
+            my_preferences["no_early_periods"] = earliest
+
+            print(f"✅ Set no classes before period {earliest}.\n")
+
+
+          elif pref_select == "2":
+
+            latest = int(input("Enter the latest allowed period (0-7): "))
+
+            my_preferences["no_late_periods"] = latest
+
+            print(f"✅ Set no classes after period {latest}.\n")
+
+
+          elif pref_select == "3":
+
+            days = input(
+              "Enter the days to avoid (example: 4 for Friday, multiple days separated by commas like 2,4): ")
+
+            days_list = [int(day.strip()) for day in days.split(",")]
+
+            my_preferences["avoid_days"] = days_list
+
+            print(f"✅ Will avoid days: {days_list}.\n")
+
+
+          elif pref_select == "4":
+            instructors = input("Enter preferred instructors (separate names by commas): ")
+            instructor_list = [inst.strip() for inst in instructors.split(",")]
+            my_preferences["preferred_instructors"] = instructor_list
+            print(f"✅ Set preferred instructors: {instructor_list}.\n")
+
+          elif pref_select == "5":
+            max_classes = int(input("Enter the maximum number of classes per day: "))
+            my_preferences["max_classes"] = max_classes
+            print(f"✅ Set max {max_classes} classes per day.\n")
+
+          elif pref_select == "6":
+            adding_prefs = False
+
+          else:
+            print("❌ Invalid selection. Please try again.")
 
       elif menu_select == "4":
         build_schedule(my_courses, my_preferences)
 
       elif menu_select == "5":
-        filename = input("Enter the filename to load classes from (example: randomClasses.txt): ")
+        filename = input("Enter the filename to load classes from: ")
         try:
           new_classes = read.loadClasses(filename)
           classes_list.extend(new_classes)
